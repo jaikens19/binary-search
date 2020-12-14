@@ -13,25 +13,37 @@ BINARY SEARCH VERSION 1:
 Write a Recursive Binary Search that returns a Boolean value indicating if
 targetNum is within the nums array.
 *******************************************************************/
-
+const oddNums = [11, 12, 13, 14, 15, 16, 17, 18, 19]
+const evenNums = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+const empty = [];
 const recurBSearch = (nums, targetNum) => {
   // Base Case: if nums has no length, return false because we've run out of 
   // items to search and haven't found targetNum
-
+    if(nums.length === 0){
+      return false
+    }
   // determine the slice point (ie the 'middle' of the array).
-
+    const middle = Math.round(nums.length / 2)
+    // console.log(middle)
   // create "left half" and "right half" arrays, not including the slice point.
-
+    const leftHalf = nums.slice(0, middle)
+    const rightHalf = nums.slice(middle, nums.length)
   // if targetNum is less than the value in the array at slice point,
   // return this search on the left half
-
+    if(targetNum < leftHalf[leftHalf.length - 1]){
+      return recurBSearch(leftHalf, targetNum)
+    } else if(targetNum > rightHalf[0]){
+      return recurBSearch(rightHalf, targetNum)
+    } else {
+      return true
+    }
   // if targetNum is greater than the value in the array at slice point,
   //return this search on the right half
 
   // if it's not greater than or less than (i.e. 'else'),
   // we know it's equal so return true
 }
-
+// recurBSearch(oddNums, 16)
 
 /*******************************************************************
 BINARY SEARCH VERSION 2:
