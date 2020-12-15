@@ -54,30 +54,31 @@ targetNum is within the nums array.
 *******************************************************************/
 
 const iterBSearch = (nums, targetNum) => {
-  // Save references to indices at the beginning, middle, and end of the array
-  // into variables: lowerIdx, midIdx, and upperIdx
-  let lowerIdx = 0
-  let midIdx = Math.floor(nums.length / 2);
-  let upperIdx = nums.length - 1
+//   // Save references to indices at the beginning, middle, and end of the array
+//   // into variables: lowerIdx, midIdx, and upperIdx
+//   let lowerIdx = 0
+//   let midIdx = Math.floor(nums.length / 2);
+//   let upperIdx = nums.length - 1
 
-  // while the lowerIdx is less than or equal to the upperIdx, there are still
-  // values to be searched
+//   // while the lowerIdx is less than or equal to the upperIdx, there are still
+//   // values to be searched
 
-  while (lowerIdx <= upperIdx){
-    console.log(lowerIdx)
-    console.log(midIdx)
-    console.log(upperIdx)
+//   while (lowerIdx <= upperIdx){
+//     console.log(lowerIdx)
+//     console.log(midIdx)
+//     console.log(upperIdx)
 
-    midIdx = Math.floor((lowerIdx + upperIdx) / 2);
+//     midIdx = Math.floor((lowerIdx + upperIdx) / 2);
 
-    if (targetNum > nums[midIdx]){
-      lowerIdx = midIdx;
-    } else if (targetNum < nums[midIdx]){
-      upperIdx = midIdx;
-    } else {
-      return true;
-    }
-  }
+//     if (targetNum >= nums[midIdx]){
+//       lowerIdx = midIdx;
+//     } else if (targetNum <= nums[midIdx]){
+//       upperIdx = midIdx;
+//     } else {
+//       return true
+//     }
+//   }
+}
 
   // reassign the midIdx to the the middle of the new lower and upper indices
   // Hint: This is the difference between lower and upper, divided by 2
@@ -95,8 +96,8 @@ const iterBSearch = (nums, targetNum) => {
 
   // if we finish our while loop and haven't returned true, we've looked over
   // the entire array and didn't find targetNum, so return false
-}
-console.log(iterBSearch(oddNums, 17))
+
+// console.log(iterBSearch(oddNums, 18))
 
 
 /*******************************************************************
@@ -110,7 +111,23 @@ const recurBSearchIdx = (nums, targetNum) => {
   // this implementation is identical to version 1, except rather than
   // returning true/false, return the index where you found the item
   // (instead of true) or -1 (instead of false).
+  if (nums.length === 0) {
+    return -1
+  }
+  
+  const middle = Math.floor(nums.length / 2)
 
+ 
+  const leftHalf = nums.slice(0, middle)
+  const rightHalf = nums.slice(middle + 1)
+
+  if (targetNum < nums[middle]) {
+    return recurBSearchIdx(leftHalf, targetNum)
+  } else if (targetNum > nums[middle]) {
+    return recurBSearchIdx(rightHalf, targetNum)
+  } else {
+    return true
+  }
   // HINT: the index value you return should be the index in the ORIGINAL array
   // and not the index of the sliced array. You'll notice this problem arise
   // on the 'right half' recursion. in that, try saving the return value of the
